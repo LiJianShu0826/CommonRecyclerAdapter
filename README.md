@@ -1,2 +1,2 @@
-# CommonRecyclerViewAdapter
+# CommonRecyclerAdapter
 封装RecyclerView的Adapter
