@@ -14,8 +14,10 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
     protected List<T> mData;
     @LayoutRes
     private int mLayoutId;
+
     private OnItemClickListener mOnItemClickListener;
     private OnItemChildClickListener mOnItemChildClickListener;
+    private OnItemLongClickListener mOnItemLongClickListener;
 
     public BaseAdapter(Context context, @LayoutRes int layoutId, List<T> data) {
         this.mContext = context;
@@ -25,13 +27,21 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
 
     @NonNull
     @Override
-    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int viewType) {
         final BaseViewHolder viewHolder = BaseViewHolder.createViewHolder(mContext, viewGroup, mLayoutId);
         if (mOnItemClickListener != null) {
             viewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mOnItemClickListener.itemClickListener(viewHolder, viewHolder.getAdapterPosition());
+                }
+            });
+        }
+        if (mOnItemLongClickListener != null) {
+            viewHolder.getConvertView().setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return mOnItemLongClickListener.itemLongClickListener(viewHolder, viewHolder.getAdapterPosition());
                 }
             });
         }
@@ -55,6 +65,10 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
         this.mOnItemClickListener = listener;
     }
 
+    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+        this.mOnItemLongClickListener = listener;
+    }
+
     public void setOnItemChildClickListener(OnItemChildClickListener listener) {
         this.mOnItemChildClickListener = listener;
     }
@@ -69,5 +83,9 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
 
     public interface OnItemChildClickListener {
         void itemChildClickListener(View v, int position);
+    }
+
+    public interface OnItemLongClickListener {
+        boolean itemLongClickListener(BaseViewHolder viewHolder, int position);
     }
 }

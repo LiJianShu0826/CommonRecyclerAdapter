@@ -14,14 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
     private List<String> mData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView = findViewById(R.id.recycler);
+        RecyclerView recyclerView = findViewById(R.id.recycler);
 
         initData();
 
@@ -37,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void itemChildClickListener(View v, int position) {
                 Toast.makeText(MainActivity.this, "button" + position + "被点击了", Toast.LENGTH_SHORT).show();
+            }
+        });
+        adapter.setOnItemLongClickListener(new BaseAdapter.OnItemLongClickListener() {
+            @Override
+            public boolean itemLongClickListener(BaseViewHolder viewHolder, int position) {
+                Toast.makeText(MainActivity.this, "item" + position + "被长按了", Toast.LENGTH_SHORT).show();
+                return false;
             }
         });
         recyclerView.setAdapter(adapter);

@@ -24,7 +24,6 @@ public abstract class MultiItemBaseAdapter<T> extends BaseAdapter<T> {
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         int layoutId = mMultiItemTypeSupport.getLayoutId(viewType);
-        BaseViewHolder viewHolder = BaseViewHolder.createViewHolder(mContext, viewGroup, layoutId);
-        return viewHolder;
+        return BaseViewHolder.createViewHolder(mContext, viewGroup, layoutId);
     }
 }
