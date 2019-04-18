@@ -26,6 +26,17 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
         this.mData = data;
     }
 
+    @SuppressWarnings("unchecked")
+    public void setDataChanged(List<T> data) {
+        if (data != mData) {
+            if (data != null && data.size() > 0) {
+                mData.clear();
+                mData.add((T) data);
+                notifyDataSetChanged();
+            }
+        }
+    }
+
     @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int viewType) {

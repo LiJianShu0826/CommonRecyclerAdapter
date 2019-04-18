@@ -33,6 +33,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         return new BaseViewHolder(context, view);
     }
 
+    @SuppressWarnings("unchecked")
     public <T extends View> T getView(@IdRes int resId) {
         if (mViews != null) {
             View view = mViews.get(resId);
