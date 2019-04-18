@@ -49,9 +49,8 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         return mConvertView;
     }
 
-    public final BaseViewHolder setAdapter(BaseAdapter adapter) {
+    public final void setAdapter(BaseAdapter adapter) {
         this.adapter = adapter;
-        return this;
     }
 
     public final BaseViewHolder setOnChildClickListener(@IdRes int resId) {
@@ -61,6 +60,19 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
                 @Override
                 public void onClick(View v) {
                     adapter.getOnItemChildClickListener().itemChildClickListener(v, getLayoutPosition());
+                }
+            });
+        }
+        return this;
+    }
+
+    public final BaseViewHolder setOnChildLongClickListener(@IdRes int resId) {
+        View view = getView(resId);
+        if (view != null) {
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return adapter.getOnChildLongClickListener().childLongClickListener(v, getLayoutPosition());
                 }
             });
         }

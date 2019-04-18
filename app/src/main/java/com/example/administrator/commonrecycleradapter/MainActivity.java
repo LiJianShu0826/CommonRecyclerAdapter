@@ -45,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        adapter.setOnChildLongClickListener(new BaseAdapter.OnChildLongClickListener() {
+            @Override
+            public boolean childLongClickListener(View v, int position) {
+                Toast.makeText(MainActivity.this, "button" + position + "被长按了", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
         recyclerView.setAdapter(adapter);
     }
 

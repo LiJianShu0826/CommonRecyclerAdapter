@@ -18,6 +18,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
     private OnItemClickListener mOnItemClickListener;
     private OnItemChildClickListener mOnItemChildClickListener;
     private OnItemLongClickListener mOnItemLongClickListener;
+    private OnChildLongClickListener mOnChildLongClickListener;
 
     public BaseAdapter(Context context, @LayoutRes int layoutId, List<T> data) {
         this.mContext = context;
@@ -77,6 +78,14 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
         return mOnItemChildClickListener;
     }
 
+    public void setOnChildLongClickListener(OnChildLongClickListener listener) {
+        this.mOnChildLongClickListener = listener;
+    }
+
+    public OnChildLongClickListener getOnChildLongClickListener() {
+        return mOnChildLongClickListener;
+    }
+
     public interface OnItemClickListener {
         void itemClickListener(BaseViewHolder viewHolder, int position);
     }
@@ -87,5 +96,9 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
 
     public interface OnItemLongClickListener {
         boolean itemLongClickListener(BaseViewHolder viewHolder, int position);
+    }
+
+    public interface OnChildLongClickListener {
+        boolean childLongClickListener(View v, int position);
     }
 }

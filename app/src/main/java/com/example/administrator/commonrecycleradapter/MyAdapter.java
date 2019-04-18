@@ -15,7 +15,8 @@ public class MyAdapter extends BaseAdapter<String> {
 
     @Override
     public void convert(BaseViewHolder baseViewHolder, int position, String data) {
-        baseViewHolder.setText(R.id.textView, data);
-        baseViewHolder.setOnChildClickListener(R.id.btn);
+        baseViewHolder.setText(R.id.textView, data)
+                .setOnChildClickListener(R.id.btn)
+                .setOnChildLongClickListener(R.id.btn);
     }
 }
