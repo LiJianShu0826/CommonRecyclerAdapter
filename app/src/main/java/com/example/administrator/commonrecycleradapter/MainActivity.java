@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean itemLongClickListener(BaseViewHolder viewHolder, int position) {
                 Toast.makeText(MainActivity.this, "item" + position + "被长按了", Toast.LENGTH_SHORT).show();
-                return false;
+                return true;
             }
         });
         adapter.setOnChildLongClickListener(new BaseAdapter.OnChildLongClickListener() {
